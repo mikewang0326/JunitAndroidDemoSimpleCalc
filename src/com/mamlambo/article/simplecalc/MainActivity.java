@@ -34,8 +34,10 @@ package com.mamlambo.article.simplecalc;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -50,10 +52,10 @@ public class MainActivity extends Activity {
 
         final EditText value1 = (EditText) findViewById(R.id.value1);
         final EditText value2 = (EditText) findViewById(R.id.value2);
-
+        
         final TextView result = (TextView) findViewById(R.id.result);
 
-        Button addButton = (Button) findViewById(R.id.addValues);
+        final Button addButton = (Button) findViewById(R.id.addValues);
         addButton.setOnClickListener(new OnClickListener() {
 
             public void onClick(View v) {
@@ -84,5 +86,17 @@ public class MainActivity extends Activity {
                 }
             }
         });
+        
+     value2.setOnKeyListener(new OnKeyListener() {
+			
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (keyCode == event.KEYCODE_ENTER) {
+					addButton.requestFocus();
+					return true;
+				}
+				return false;
+			}
+		});
     }
 }
